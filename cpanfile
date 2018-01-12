@@ -1,2 +1,2 @@
-use List::MoreUtils;
-use YAML;
+requires 'List::MoreUtils';
+requires 'YAML';
