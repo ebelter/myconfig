@@ -12,9 +12,9 @@ my $build = Module::Build->new(
     dist_abstract => 'Basic Application Config with Command Line Interface',
     dist_version => '0.01',
     test_requires => {
-        'Path::Class' => 1,
-        'Test::Exception' => 1,
-        'Test::More' => 1,
+        'Path::Class' => 0,
+        'Test::Exception' => 0,
+        'Test::More' => 0,
     },
     build_requires => {
         'Module::Build' => 0,

@@ -12,16 +12,18 @@ use lib dir(__FILE__)->absolute->parent->parent->subdir('lib')->stringify;
 my %test = ( class => 'MyConfig' );
 use_ok($test{class}) or die;
 
+my $pwd = dir(__FILE__)->parent->absolute;
 subtest 'load_config_from_file' =>  sub{
     plan tests => 4;
 
-    my $invalid_yml = 'config.invalid.yml';
+    my $invalid_yml = $pwd->file('config.invalid.yml')->stringify;
     throws_ok(sub{ MyConfig::load_config_from_file($invalid_yml); }, qr/YAML Error/, 'load_config fails w/ invalid yml');
 
-    ok(MyConfig::load_config_from_file('config.yml'), 'load_config_file');
+    my $config_yml = $pwd->file('config.yml')->stringify;
+    ok(MyConfig::load_config_from_file($config_yml), 'load_config_file');
 
     ok(MyConfig::is_loaded(), 'config is loaded');
-    is(MyConfig::config_loaded_from(), 'config.yml', 'config_file_loaded');
+    is(MyConfig::config_loaded_from(), $config_yml, 'config_file_loaded');
 
 };
 
